@@ -1,7 +1,7 @@
 const email = document.querySelector('input[type="email"]');
 const password = document.querySelector('input[type="password"]');
-const labelPassword = document.querySelector('#passwordLabel');
 const checkbox = document.querySelector('input[type="checkbox"]');
+const labelPassword = document.querySelector('#passwordLabel');
 const button = document.querySelector('button');
 
 button.addEventListener('click', (event) => {
@@ -15,23 +15,26 @@ button.addEventListener('click', (event) => {
         return;
     }
 
-    sessionStorage.setItem('email', emailValue);
-    sessionStorage.setItem('password', passwordValue);
+    if (
+        emailValue !== sessionStorage.getItem('email') ||
+        passwordValue !== sessionStorage.getItem('password')
+    ) {
+        alert('E-mail e/ou senha incorreto.');
+        return;
+    }
 
-    alert('Usuário registrado com sucesso.');
+    alert('Acesso permitido.');
 
-    window.location.href = './login.html';
 });
 
 checkbox.addEventListener('change', () => {
     const attributeValue = password.getAttribute('type')
 
-    if (attributeValue === 'password') {
+    if (attributeValue === 'password'){
         password.setAttribute('type', 'text');
         labelPassword.textContent = 'Ocultar Senha';
-        console.log('atributeValue', attributeValue);
         return;
-    }
+}
     password.setAttribute('type', 'password');
     labelPassword.textContent = 'Mostrar senha';
 
